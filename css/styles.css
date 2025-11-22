@@ -1,0 +1,230 @@
+/*
+  V3 - A "Real" Portfolio Design
+  - Interactive particle hero background
+  - Filterable portfolio with animations
+  - Refined, high-polish components
+  - Enhanced whitespace and professional typography
+*/
+
+:root {
+  --background-dark: #111827; /* Dark blue-gray */
+  --background-light: #f9fafb; /* Very light gray */
+  --surface-dark: #1f2937;
+  --surface-light: #ffffff;
+  --border-dark: #374151;
+  --border-light: #e5e7eb;
+  
+  --text-dark-primary: #111827;
+  --text-light-primary: #f9fafb;
+  --text-dark-secondary: #4b5563;
+  --text-light-secondary: #9ca3af;
+
+  --accent-blue: #3b82f6;
+  --accent-blue-hover: #2563eb;
+  
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Base & Dark Mode */
+body {
+  font-family: var(--font-primary);
+  background-color: var(--background-light);
+  color: var(--text-dark-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s, color 0.4s;
+  overflow-x: hidden;
+}
+
+body.dark-theme {
+  background-color: var(--background-dark);
+  color: var(--text-light-primary);
+}
+
+/* Typography */
+h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.025em; }
+h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+h2.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+p {
+  color: var(--text-dark-secondary);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+body.dark-theme p {
+  color: var(--text-light-secondary);
+}
+
+/* Hero Section with Particles.js */
+.hero-section {
+  height: 90vh;
+  min-height: 700px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+#tsparticles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 1rem;
+  animation: fadeIn 1.5s ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-content h1 {
+  font-weight: 800;
+}
+.hero-content p {
+    color: var(--text-light-secondary);
+    font-size: 1.25rem;
+    max-width: 650px;
+    margin: 1rem auto 0 auto;
+}
+body.dark-theme .hero-content h1, body.dark-theme .hero-content p {
+    color: var(--text-light-primary);
+}
+
+
+/* Section Styling */
+.content-section {
+  padding: 6rem 1rem;
+}
+
+/* Portfolio Section */
+.portfolio-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+}
+.filter-btn {
+  background-color: transparent;
+  border: 1px solid var(--border-light);
+  color: var(--text-dark-secondary);
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+body.dark-theme .filter-btn {
+  border-color: var(--border-dark);
+  color: var(--text-light-secondary);
+}
+.filter-btn:hover {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+.filter-btn.active {
+  background-color: var(--accent-blue);
+  color: #fff;
+  border-color: var(--accent-blue);
+}
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+.portfolio-item {
+  background: var(--surface-light);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+}
+body.dark-theme .portfolio-item {
+    background: var(--surface-dark);
+    border-color: var(--border-dark);
+    box-shadow: none;
+}
+.portfolio-item.hide {
+  transform: scale(0.9);
+  opacity: 0;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.portfolio-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+.portfolio-item-image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+.portfolio-item-content {
+  padding: 1.5rem;
+}
+.portfolio-item-content h4 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.portfolio-item-content .category-badge {
+    display: inline-block;
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--accent-blue);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+body.dark-theme .portfolio-item-content .category-badge {
+  background-color: rgba(59, 130, 246, 0.2);
+}
+
+/* General UI Elements */
+#themeToggle {
+    font-size: 1.2rem;
+    color: var(--text-dark-secondary);
+}
+body.dark-theme #themeToggle {
+    color: var(--text-light-secondary);
+}
+.btn-primary {
+  background-color: var(--accent-blue);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+.btn-primary:hover {
+  background-color: var(--accent-blue-hover);
+  color: #fff;
+}
+.btn-outline-primary {
+  color: var(--accent-blue);
+  border-color: var(--accent-blue);
+  border-radius: 8px;
+   padding: 0.75rem 1.5rem;
+  font-weight: 600;
+}
+.btn-outline-primary:hover {
+  background-color: var(--accent-blue);
+  color: #fff;
+}
